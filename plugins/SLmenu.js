@@ -1,28 +1,174 @@
-let handler = async (m, { conn, usedPrefix, command, text, args, isROwner }) => {
-  let trava = /true|enable|(turn)?on/i.test(command)
-  let chat = global.DATABASE._data.chats[m.chat]
-  let user = global.DATABASE._data.users[m.sender]
+let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isROwner }) => {
+  let isEnable = /true|enable|(turn)?on|1/i.test(command)
+  let chat = global.db.data.chats[m.chat]
+  let user = global.db.data.users[m.sender]
   let type = (args[0] || '').toLowerCase()
   let isAll = false
+  let isUser = false
   switch (type) {
-    case 'T1':
-      user.T1 = https://bit.ly/3DnuHGH   
+    case 'welcome':
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else if (!isAdmin) {
+        global.dfail('admin', m, conn)
+        throw false
+      }
+      chat.welcome = isEnable
+      break
+    case 'detect':
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else if (!isAdmin) {
+        global.dfail('admin', m, conn)
+        throw false
+      }
+      chat.detect = isEnable
+      break
+    case 'delete':
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
+      chat.delete = isEnable
+      break
+    case 'antidelete':
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
+      chat.delete = !isEnable
+      break
+    case 'autodelvn':
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
+      chat.autodelvn = isEnable
+      break
+    case 'document':
+      chat.useDocument = isEnable
+      break
+    case 'public':
+      isAll = true
+      if (!isROwner) {
+        global.dfail('rowner', m, conn)
+        throw false
+      }
+      global.opts['self'] = !isEnable
+      break
+    case 'antilink':
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
+      chat.antiLink = isEnable
+      break
+    case 'Sl1':
+      isUser = true
+      user.Sl1 = isEnable
+      break
+    case 'mycontact':
+    case 'mycontacts':
+    case 'whitelistcontact':
+    case 'whitelistcontacts':
+    case 'whitelistmycontact':
+    case 'whitelistmycontacts':
+      if (!isOwner) {
+        global.dfail('owner', m, conn)
+        throw false
+      }
+      conn.callWhitelistMode = isEnable
+      break
+    case 'restrict':
+      isAll = true
+      if (!isROwner) {
+        global.dfail('rowner', m, conn)
+        throw false
+      }
+      global.opts['restrict'] = isEnable
+      break
+    case 'nyimak':
+      isAll = true
+      if (!isROwner) {
+        global.dfail('rowner', m, conn)
+        throw false
+      }
+      global.opts['nyimak'] = isEnable
+      break
+    case 'autoread':
+      isAll = true
+      if (!isROwner) {
+        global.dfail('rowner', m, conn)
+        throw false
+      }
+      global.opts['autoread'] = isEnable
+      break
+    case 'pconly':
+    case 'privateonly':
+      isAll = true
+      if (!isROwner) {
+        global.dfail('rowner', m, conn)
+        throw false
+      }
+      global.opts['pconly'] = isEnable
+      break
+    case 'gconly':
+    case 'grouponly':
+      isAll = true
+      if (!isROwner) {
+        global.dfail('rowner', m, conn)
+        throw false
+      }
+      global.opts['gconly'] = isEnable
+      break
+    case 'swonly':
+    case 'statusonly':
+      isAll = true
+      if (!isROwner) {
+        global.dfail('rowner', m, conn)
+        throw false
+      }
+      global.opts['swonly'] = isEnable
+      break
+    case 'viewonce':
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
+      chat.viewonce = isEnable
       break
     default:
-      return m.reply(`
-Lista de opciones: pronto | pronto | pronto | pronto | T1
+      if (!/[01]/.test(command)) throw `
+List option: welcome | delete | public | antilink | Sl1 | detect | document | whitelistmycontacts | restrict | nyimak | autoread | pconly | gconly | swonly | viewonce
 
-Ejemplo:
+Contoh:
 ${usedPrefix}enable welcome
 ${usedPrefix}disable welcome
-`.trim())
+`.trim()
+      throw false
   }
   m.reply(`
-*${type}* fue  *${isEnable ? 'Exitosamente activado' : 'exitosamente desactivado'}* en ${isAll ? 'bot ini' : 'este chat'}
+*${type}* berhasil di *${isEnable ? 'nyala' : 'mati'}kan* ${isAll ? 'untuk bot ini' : isUser ? '' : 'untuk chat ini'}
 `.trim())
 }
-handler.help = ['trava', 'dis'].map(v => v + 'zap <option>')
+handler.help = ['on', 'dis'].map(v => v + 'trava<option>')
 handler.tags = ['group', 'owner']
-handler.command = /^SL|trava$/i
+handler.command = /^((on|dis)trava|(tru|fals)e|(turn)?o(n|ff)|[01])$/i
 
 module.exports = handler
