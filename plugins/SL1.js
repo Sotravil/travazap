@@ -4,7 +4,7 @@ function handler(m) {
   this.sendmessage(m.reply, m)
 }
 handler.help = ['trava', 'SL1']
-handler.tags = ['info']
+handler.tags = ['main']
 
 handler.command = /^(t1|SL1)$/i
 
