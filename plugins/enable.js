@@ -77,9 +77,9 @@ let handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin, isR
       }
       chat.antiLink = isEnable
       break
-    case 'autolevelup':
+    case 'Sl1':
       isUser = true
-      user.autolevelup = isEnable
+      user.Sl1 = isEnable
       break
     case 'mycontact':
     case 'mycontacts':
