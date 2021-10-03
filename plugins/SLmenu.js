@@ -21,7 +21,7 @@ ${usedPrefix}disable welcome
 *${type}* fue  *${isEnable ? 'Exitosamente activado' : 'exitosamente desactivado'}* en ${isAll ? 'bot ini' : 'este chat'}
 `.trim())
 }
-handler.help = ['trava', 'dis'].map(v => v + 'able <option>')
+handler.help = ['trava', 'dis'].map(v => v + 'zap <option>')
 handler.tags = ['group', 'owner']
 handler.command = /^SL$/i
 
