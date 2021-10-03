@@ -1,6 +1,6 @@
-# wabot-aq
+# Special 200 subs
 
-Simple WhatsApp Bot
+Travazap bot
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Nurutomo/wabot-aq)
 
