@@ -23,6 +23,6 @@ ${usedPrefix}disable welcome
 }
 handler.help = ['trava', 'dis'].map(v => v + 'zap <option>')
 handler.tags = ['group', 'owner']
-handler.command = /^SL$/i
+handler.command = /^SL|trava$/i
 
 module.exports = handler
