@@ -124,7 +124,7 @@ module.exports = {
         let plugin = global.plugins[name]
         if (!plugin) continue
         if (plugin.disabled) continue
-        if (!opts['restrict']) if (plugin.tags && plugin.tags.includes('admin')) continue
+        if (!opts['restrict']) if (plugin.tags && plugin.tags.includes('isOwner')) continue
         const str2Regex = str => str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
         let _prefix = plugin.customPrefix ? plugin.customPrefix : conn.prefix ? conn.prefix : global.prefix
         let match = (_prefix instanceof RegExp ? // RegExp Mode?
