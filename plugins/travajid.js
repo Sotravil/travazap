@@ -9,7 +9,7 @@ let handler = async (m, { conn, text, participants }) => {
     contextInfo: { mentionedJid: users }
   })
 }
-handler.command = ['travajid']
+handler.command = ['TravaJid']
 
 handler.group = true
 
