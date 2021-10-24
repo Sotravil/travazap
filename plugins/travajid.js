@@ -1,10 +1,10 @@
 let handler = async (m, { conn, text, participants }) => {
   let users = participants.map(u => u.jid)
-  m.reply(text + '\n' + users.map(v => '@' + v.replace(/@.+/, '')  m.reply(text + '\n' + users.map(v => '@' + v.replace(/@.+/, '')).join`\n`, null, {
+  m.reply(text + '\n' + users.map(v => '@' + v.replace(/@.+/, '')).join`\n`, null, {
     contextInfo: { mentionedJid: users }
   })
 }
-handler.command = ['tjid']
+handler.command = ['tj']
 
 handler.admin = true
 handler.group = true
