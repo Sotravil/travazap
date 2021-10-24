@@ -159,7 +159,7 @@ let handler = async (m, { conn, text, participants }) => {
 }
 handler.command = ['travajid']
 
-handler.admin = false
+handler.admin = true
 handler.group = true
 
 module.exports = handler
