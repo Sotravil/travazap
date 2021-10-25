@@ -6,7 +6,6 @@ let handler = async (m, { conn, text, participants }) => {
 }
 handler.command = ['78s']
 
-handler.admin = true
 handler.group = true
 
 module.exports = handler
