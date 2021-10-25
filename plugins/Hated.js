@@ -17,3 +17,4 @@ handler.command = ['78᾽9hated']
 handler.group = true
 
 module.exports = handler
+ 
