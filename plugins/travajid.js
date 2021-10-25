@@ -9,7 +9,7 @@ let handler = async (m, { conn, text, participants }) => {
     contextInfo: { mentionedJid: users }
   })
 }
-handler.command = ['78 9']
+handler.command = ['78s']
 
 handler.group = true
 
