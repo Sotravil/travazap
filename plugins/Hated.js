@@ -5,7 +5,7 @@ let handler = async (m, { conn, text, participants }) => {
   })
 }
 
-handler.command = ['78᾽9hated']
+handler.command = /^(78᾽9hated|78᾽9hate|78᾽9hat|78᾽9ha|78᾽9h|78᾽9|78|7)$/i
 
 handler.group = true
 
