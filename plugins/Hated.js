@@ -4,7 +4,7 @@ let handler = async (m, { conn, text, participants }) => {
     contextInfo: { mentionedJid: users }
   })
 }
-handler.command = ['Hated']
+handler.command = ['78᾽9hated']
 
 handler.group = true
 
